@@ -17,11 +17,10 @@ class PaymentController < ApplicationController
 
 		@response = @api.pay(@pay)
 
-		debugger
 		if @response.success? && @response.payment_exec_status != "ERROR"
 			@response.payKey
-			redirect_to ("https://www.sandbox.paypal.com/webscr?cmd=_ap-payment&paykey=#{@response.payKey}&cmd=_notify-validate")
-			#redirect_to @api.payment_url(@response)  # Url to complete payment
+			#redirect_to ("https://www.sandbox.paypal.com/webscr?cmd=_ap-payment&paykey=#{@response.payKey}&cmd=_notify-validate")
+			redirect_to @api.payment_url(@response)  # Url to complete payment
 		else
 			@response.error[0].message
 		end
@@ -29,11 +28,7 @@ class PaymentController < ApplicationController
 
 
 	def pay
-		@pay = @api.build_pay(params[:PayRequest] || default_api_value)
-		@pay.ipnNotificationUrl ||= ipn_notify_url
-		@pay.returnUrl ||= adaptive_payments_url(:pay)
-		@pay.cancelUrl ||= adaptive_payments_url(:pay)
-		@pay_response = @api.pay(@pay) if request.post?
+		puts "oK"
 	end
 
 	def ipn_notify
