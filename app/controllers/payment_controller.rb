@@ -18,10 +18,12 @@ class PaymentController < ApplicationController
 		@response = @api.pay(@pay)
 		if @response.success? && @response.payment_exec_status != "ERROR"
 			@response.payKey
+			@ok = 'ok'
 			# redirect_to ("https://www.sandbox.paypal.com/webscr?cmd=_ap-payment&paykey=#{@response.payKey}")
 			redirect_to @api.payment_url(@response)  # Url to complete payment
 		else
 			@response.error[0].message
+			@ok = "error"
 		end
 	end
 
