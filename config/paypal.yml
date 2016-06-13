@@ -8,7 +8,8 @@ test: &default
   mode: sandbox
 
   # Credentials for Classic APIs
-  app_id: APP-80W284485P519543T
+  # app_id: APP-80W284485P519543T
+  app_id: APP-7R8398975V428283R
   username: bruno19850511-facilitator_api1.yahoo.com #jb-us-seller_api1.paypal.com
   password: FE5DVXMBHK7CWVY5  # WX4WTU3S8MY44S7F
   signature: AdEspXkb-VJPlq5cFqemocL7r0hfAGegJYS1u-0vwHoJptyfG1xKwtVz # AFcWxV21C7fd0v3bYYYRCpSSRl31A7yDhhsPUU2XhtMoZXsWHFxu-RWy
