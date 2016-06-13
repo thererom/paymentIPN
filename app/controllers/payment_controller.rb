@@ -42,7 +42,7 @@ class PaymentController < ApplicationController
         render :text => "INVALID"
       end
 
-      redirect_to welcome_index_url
+      #  redirect_to welcome_index_url
     end
 
 end
