@@ -16,11 +16,10 @@ class PaymentController < ApplicationController
 			:returnUrl => request.base_url + "/payment/pay" })
 
 		@response = @api.pay(@pay)
-		debugger
 		if @response.success? && @response.payment_exec_status != "ERROR"
 			@response.payKey
-			redirect_to ("https://www.sandbox.paypal.com/webscr?cmd=_ap-payment&paykey=#{@response.payKey}")
-			# redirect_to @api.payment_url(@response)  # Url to complete payment
+			# redirect_to ("https://www.sandbox.paypal.com/webscr?cmd=_ap-payment&paykey=#{@response.payKey}")
+			redirect_to @api.payment_url(@response)  # Url to complete payment
 		else
 			@response.error[0].message
 		end
@@ -32,7 +31,7 @@ class PaymentController < ApplicationController
 	end
 
 	def ipn_notify
-		debugger
+		# debugger
       if PayPal::SDK::Core::API::IPN.valid?(request.raw_post)
         logger.info("IPN message: VERIFIED")
         render :text => "VERIFIED"
