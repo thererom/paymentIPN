@@ -5,22 +5,22 @@ class PaymentController < ApplicationController
 
 		@pay = @api.build_pay({
 			:actionType => "PAY",
-			:cancelUrl => "http://localhost:3000/payment/pay",
+			:cancelUrl => request.base_url + "/payment/pay",
 			:currencyCode => "USD",
 			:feesPayer => "SENDER",
-			:ipnNotificationUrl => "http://localhost:3000/payment_notifications",
+			:ipnNotificationUrl => request.base_url + "/payment_notifications",
 			:receiverList => {
 			:receiver => [{
 			  :amount => 1.0,
 			  :email => "bruno19850511-facilitator@yahoo.com" }] },
-			:returnUrl => "http://localhost:3000/payment/pay" })
+			:returnUrl => request.base_url + "/payment/pay" })
 
 		@response = @api.pay(@pay)
-
+		debugger
 		if @response.success? && @response.payment_exec_status != "ERROR"
 			@response.payKey
-			#redirect_to ("https://www.sandbox.paypal.com/webscr?cmd=_ap-payment&paykey=#{@response.payKey}&cmd=_notify-validate")
-			redirect_to @api.payment_url(@response)  # Url to complete payment
+			redirect_to ("https://www.sandbox.paypal.com/webscr?cmd=_ap-payment&paykey=#{@response.payKey}")
+			# redirect_to @api.payment_url(@response)  # Url to complete payment
 		else
 			@response.error[0].message
 		end
