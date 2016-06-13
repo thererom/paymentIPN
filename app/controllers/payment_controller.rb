@@ -5,15 +5,15 @@ class PaymentController < ApplicationController
 
 		@pay = @api.build_pay({
 			:actionType => "PAY",
-			:cancelUrl => request.base_url + "/payment/pay",
+			:cancelUrl => payment_pay_url,
 			:currencyCode => "USD",
 			:feesPayer => "SENDER",
-			:ipnNotificationUrl => request.base_url + "/payment_notifications",
+			:ipnNotificationUrl => payment_ipn_notify_url, #request.base_url + "/payment_notifications",
 			:receiverList => {
 			:receiver => [{
 			  :amount => 1.0,
 			  :email => "bruno19850511-facilitator@yahoo.com" }] },
-			:returnUrl => request.base_url + "/payment/pay" })
+			:returnUrl => payment_pay_url })
 
 		@response = @api.pay(@pay)
 		if @response.success? && @response.payment_exec_status != "ERROR"
