@@ -33,16 +33,18 @@ class PaymentController < ApplicationController
 	end
 
 	def ipn_notify
+		puts "Ok~"
+		
 		# debugger
-      if PayPal::SDK::Core::API::IPN.valid?(request.raw_post)
-        # logger.info("IPN message: VERIFIED")
-        render :text => "VERIFIED"
-      else
-        # logger.info("IPN message: INVALID")
-        render :text => "INVALID"
-      end
+      # if PayPal::SDK::Core::API::IPN.valid?(request.raw_post)
+      #   # logger.info("IPN message: VERIFIED")
+      #   render :text => "VERIFIED"
+      # else
+      #   # logger.info("IPN message: INVALID")
+      #   render :text => "INVALID"
+      # end
 
-      #  redirect_to welcome_index_url
+       redirect_to welcome_index_url
     end
 
 end
