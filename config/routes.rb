@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   get 'payment/index'
 
-  get 'payment/ipn_notify' => 'payment#ipn_notify'
+  post 'payment/ipn_notify' => 'payment#ipn_notify'
   get 'payment/pay' => 'payment#pay'
 
   get 'welcome/index'
